@@ -40,7 +40,7 @@ public class AddressService {
 
         address.setArea(addressDTO.getArea());
         address.setStreet(addressDTO.getStreet());
-        address.setBuildingNumber(address.getBuildingNumber());
+        address.setBuildingNumber(addressDTO.getBuildingNumber());
 
         addressRepository.save(address);
     }
@@ -49,6 +49,7 @@ public class AddressService {
         Address address = addressRepository.findAddressById(id);
         if (address == null)
             throw new APIException("address not found");
+        address.getTeacher().setAddress(null);
         addressRepository.delete(address);
     }
 

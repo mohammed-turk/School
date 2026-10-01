@@ -2,7 +2,9 @@ package com.example.school.Service;
 
 import com.example.school.API.APIException;
 import com.example.school.Model.Address;
+import com.example.school.Model.Course;
 import com.example.school.Model.Teacher;
+import com.example.school.Repository.CourseRepository;
 import com.example.school.Repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeacherService {
     private final TeacherRepository teacherRepository;
+//    private final CourseRepository courseRepository;
 
     public List<Teacher> get(){
         return teacherRepository.findAll();
@@ -64,6 +67,13 @@ public class TeacherService {
             s += "street: " + address.getStreet() + "\n";
             s += "building number: " + address.getBuildingNumber() + "\n";
         }
+        if (!teacher.getCourses().isEmpty())
+            s += "his courses: " + "\n";
+        for (Course course: teacher.getCourses()){
+            s +=  course.getName() + "\n";
+        }
         return s;
     }
+
+
 }
